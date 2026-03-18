@@ -1,0 +1,35 @@
+.iconfont {
+    font-family: "Segoe UI Symbol", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 600;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.svg-icon {
+    width: 1em;
+    height: 1em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.svg-icon svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    stroke: none;
+}
+
+.svg-icon svg path,
+.svg-icon svg rect,
+.svg-icon svg circle,
+.svg-icon svg polygon {
+    fill: currentColor;
+}
