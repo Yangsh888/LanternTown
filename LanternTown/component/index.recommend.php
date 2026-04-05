@@ -48,7 +48,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                                 </div>
                                                 <div class="item-abstract">
                                                     <?php if ($item->fields->articleDesc): ?>
-                                                        <?php $item->fields->articleDesc() ?>
+                                                        <?php echo lt_text($item->fields->articleDesc); ?>
                                                     <?php else: ?>
                                                         <?php $item->excerpt(80, "..."); ?>
                                                     <?php endif; ?>
@@ -104,7 +104,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                             </div>
                                             <div class="item-abstract">
                                                 <?php if ($item->fields->articleDesc): ?>
-                                                    <?php $item->fields->articleDesc() ?>
+                                                    <?php echo lt_text($item->fields->articleDesc); ?>
                                                 <?php else: ?>
                                                     <?php $item->excerpt(80, "..."); ?>
                                                 <?php endif; ?>

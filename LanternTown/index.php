@@ -6,7 +6,7 @@ declare(strict_types=1);
  *
  * @package LanternTown
  * @author TypeRenew/Yangsh888
- * @version 1.0.0
+ * @version 1.0.1
  * @link https://github.com/Yangsh888/LanternTown
  */
 
