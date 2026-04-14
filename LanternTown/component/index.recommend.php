@@ -46,7 +46,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                             <?php for ($i = 0; $i < $number; $i++): ?>
                                 <?php $this->widget('\Widget\Archive@recommend' . $i, 'pageSize=1&type=post', 'cid=' . (int) $recommendCounts[$i])->to($item); ?>
                                 <div class="swiper-slide">
-                                    <div data-href="<?php echo lt_esc_attr(lt_text($item->permalink)); ?>" onclick="toPost(this)" class="article-item single-article-item">
+                                    <div data-href="<?php echo lt_esc_attr(lt_text($item->permalink)); ?>" onclick="location.href=this.dataset.href" class="article-item single-article-item">
                                         <div class="item-container">
                                             <div class="item-content single-item-content">
                                                 <div class="item-title font-bold">
