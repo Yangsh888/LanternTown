@@ -61,6 +61,11 @@ function lt_lines(mixed $value): array
     return $result;
 }
 
+function lt_report_exception(string $scope, \Throwable $e): void
+{
+    error_log('[LanternTown] ' . $scope . ': ' . $e->getMessage());
+}
+
 function lt_comment_require_url(object $options): bool
 {
     if (isset($options->commentsRequireUrl)) {
@@ -179,7 +184,8 @@ function getReply(int $parent, string $content): string
         }
 
         return '<p><span>@' . lt_esc_html($author) . '</span> ' . $contentText . '</p>';
-    } catch (\Throwable) {
+    } catch (\Throwable $e) {
+        lt_report_exception('commentReplyAt', $e);
         return $contentText;
     }
 }
@@ -244,7 +250,8 @@ function theNext(object $widget, object $options): void
         $content = $widget->filter($content);
         \Typecho\Widget::widget('\Widget\Archive@next', 'pageSize=1&type=post', 'cid=' . (int) $content['cid'])->to($item);
         echo lt_render_post_link($content, $item, $options, '下一篇');
-    } catch (\Throwable) {
+    } catch (\Throwable $e) {
+        lt_report_exception('theNext', $e);
     }
 }
 
@@ -269,7 +276,8 @@ function thePrev(object $widget, object $options): void
         $content = $widget->filter($content);
         \Typecho\Widget::widget('\Widget\Archive@prev', 'pageSize=1&type=post', 'cid=' . (int) $content['cid'])->to($item);
         echo lt_render_post_link($content, $item, $options, '上一篇');
-    } catch (\Throwable) {
+    } catch (\Throwable $e) {
+        lt_report_exception('thePrev', $e);
     }
 }
 

@@ -7,20 +7,7 @@ use Utils\Helper;
 
 lt_send_security_headers();
 
-$themeUrlFull = Helper::options()->themeUrl(null, Helper::options()->theme);
-$themeUrlRelative = str_replace(
-    '//usr',
-    '/usr',
-    str_replace(
-        Helper::options()->siteUrl,
-        Helper::options()->rootUrl . '/',
-        $themeUrlFull
-    )
-);
 $themeConfig = [
-    'THEME_URL' => rtrim($themeUrlRelative, '/') . '/',
-    'BLOG_TITLE' => lt_text($this->options->title ?? ''),
-    'THEME_LOGO' => lt_text($this->options->logoUrl ?? ''),
     'TURN_PAGE_TYPE' => lt_text($this->options->turnPageType ?? 'page'),
     'THEME_MODE' => (int) lt_text($this->options->themeMode ?? 0)
 ];
@@ -30,6 +17,8 @@ $fieldDesc = lt_text($this->fields->desc ?? '');
 $currentPage = (int) $this->request->filter('int')->get('page', 1);
 $logoUrl = lt_text($this->options->logoUrl ?? '');
 $siteTitle = lt_text($this->options->title ?? '');
+$loadPrism = $this->is('post') || $this->is('page');
+$loadFancybox = $this->is('post');
 
 $navItems = [];
 $pages = $this->widget('\Widget\Contents\Page\Rows');
@@ -56,15 +45,16 @@ while ($pages->next()) {
     <script type="text/javascript" src="<?php $this->options->themeUrl('libs/headroom/headroom.min.js'); ?>"></script>
     <link rel="stylesheet" type="text/css" media="all" href="<?php $this->options->themeUrl('assets/css/font.css'); ?>"/>
     <link rel="stylesheet" type="text/css" media="all" href="<?php $this->options->themeUrl('assets/css/lantern.min.css'); ?>"/>
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('libs/swiper/swiper-bundle.min.css'); ?>"/>
-    <script type="text/javascript" src="<?php $this->options->themeUrl('libs/swiper/swiper-bundle.min.js'); ?>"></script>
     <script>
         window.LANTERTOWN_CONFIG = <?php echo json_encode($themeConfig, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_THROW_ON_ERROR); ?>;
     </script>
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('libs/prism/prism.min.css'); ?>"/>
-    <script type="text/javascript" src="<?php $this->options->themeUrl('libs/prism/prism.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php $this->options->themeUrl('libs/clipboard/clipboard.min.js'); ?>"></script>
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('libs/fancybox/jquery.fancybox.min.css'); ?>"/>
+    <?php if ($loadPrism): ?>
+        <link rel="stylesheet" href="<?php $this->options->themeUrl('libs/prism/prism.min.css'); ?>"/>
+        <script type="text/javascript" src="<?php $this->options->themeUrl('libs/prism/prism.min.js'); ?>"></script>
+    <?php endif; ?>
+    <?php if ($loadFancybox): ?>
+        <link rel="stylesheet" href="<?php $this->options->themeUrl('libs/fancybox/jquery.fancybox.min.css'); ?>"/>
+    <?php endif; ?>
     <?php if ($fieldKeywords !== '' || $fieldDesc !== '') : ?>
         <?php $this->header('keywords=' . rawurlencode($fieldKeywords) . '&description=' . rawurlencode($fieldDesc)); ?>
     <?php else : ?>

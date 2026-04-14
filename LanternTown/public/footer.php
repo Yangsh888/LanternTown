@@ -18,9 +18,10 @@ $currentYear = date('Y');
         </div>
     </div>
     <script src="<?php $this->options->themeUrl('assets/js/lantern.config.js');?>"></script>
-    <script src="<?php $this->options->themeUrl('libs/fancybox/jquery.fancybox.min.js');?>"></script>
     <?php $this->footer(); ?>
 </footer>
+<?php if ($this->is('post')): ?>
+<script src="<?php $this->options->themeUrl('libs/fancybox/jquery.fancybox.min.js');?>"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof jQuery !== 'function' || typeof jQuery.fn.fancybox !== 'function') {
@@ -34,3 +35,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<?php endif; ?>
