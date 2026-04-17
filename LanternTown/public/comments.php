@@ -81,7 +81,7 @@ function threadedComments(object $comments, object $options): void
                     <?php endif; ?>
                     <button type="submit" class="submit" id="misubmit">提交</button>
                     <?php $security = $this->widget('\Widget\Security'); ?>
-                    <input type="hidden" name="_" value="<?php echo lt_esc_attr($security->getToken($this->request->getReferer())); ?>">
+                    <input type="hidden" name="_" value="<?php echo lt_esc_attr($security->getToken($this->request->getRequestUrl())); ?>">
                 </form>
             </div>
         <?php else: ?>
