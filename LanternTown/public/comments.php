@@ -40,7 +40,7 @@ function threadedComments(object $comments, object $options): void
                             <em>（审核后可见）</em>
                         <?php endif; ?>
                         <time class="comment-time"><?php $comments->date('M j, Y'); ?></time>
-                        <span class="comment-reply" onclick="return TypechoComment.reply('<?php $comments->theId(); ?>', <?php $comments->coid(); ?>)"><?php $comments->reply('回复'); ?></span>
+                        <span class="comment-reply" onclick="return TypechoComment.reply(<?php echo \Typecho\Common::jsonEncode((string) $comments->theId(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP, '""'); ?>, <?php $comments->coid(); ?>)"><?php $comments->reply('回复'); ?></span>
                     </div>
                     <div class="comment-content">
                         <?php echo getReply((int) $comments->parent, lt_text($comments->content)); ?>

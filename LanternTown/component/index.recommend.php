@@ -28,6 +28,14 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
             static fn(string $cid): bool => ctype_digit($cid)
         )
     );
+    $validRecommendCounts = [];
+    foreach ($recommendCounts as $index => $cid) {
+        $this->widget('\Widget\Archive@recommend-check-' . $index, 'pageSize=1&type=post', 'cid=' . (int) $cid)->to($item);
+        if ($item->have()) {
+            $validRecommendCounts[] = $cid;
+        }
+    }
+    $recommendCounts = $validRecommendCounts;
     $number = count($recommendCounts);
     ?>
     <?php if ($number >= 1): ?>
@@ -54,7 +62,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                                 </div>
                                                 <div class="item-abstract">
                                                     <?php if ($item->fields->articleDesc): ?>
-                                                        <?php echo lt_text($item->fields->articleDesc); ?>
+                                                        <?php echo lt_esc_html(lt_text($item->fields->articleDesc)); ?>
                                                     <?php else: ?>
                                                         <?php $item->excerpt(80, "..."); ?>
                                                     <?php endif; ?>

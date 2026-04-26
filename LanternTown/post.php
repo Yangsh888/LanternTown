@@ -121,9 +121,9 @@ $authorMail = lt_text($this->author->mail ?? '');
                             <a href="mailto:<?php echo lt_esc_attr($authorMail); ?>" class="iconfont"><?php echo lt_icon('mail'); ?></a>
                             <?php foreach ($socialList as $item): ?>
                                 <?php if ($item['type'] === 'qr'): ?>
-                                    <a href="javascript:;" class="iconfont" data-qr="<?php echo lt_esc_attr($item['link']); ?>" data-title="<?php echo lt_esc_attr($item['name']); ?>"><?php echo getIconByType($item['name']); ?></a>
+                                    <a href="javascript:;" class="iconfont" data-qr="<?php echo lt_esc_attr($item['link']); ?>" data-title="<?php echo lt_esc_attr($item['name']); ?>"><?php echo lt_icon($item['name']); ?></a>
                                 <?php else: ?>
-                                    <a href="<?php echo lt_esc_attr($item['link']); ?>" target="_blank" rel="noopener noreferrer" class="iconfont"><?php echo getIconByType($item['name']); ?></a>
+                                    <a href="<?php echo lt_esc_attr($item['link']); ?>" target="_blank" rel="noopener noreferrer" class="iconfont"><?php echo lt_icon($item['name']); ?></a>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                             <?php if (!empty($rewardUrls)): ?>
@@ -199,7 +199,11 @@ $authorMail = lt_text($this->author->mail ?? '');
 <script>
     (function () {
         if (typeof jQuery !== 'function') return;
-        var rewardUrls = <?php echo json_encode($rewardUrls, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
+        var rewardUrls = <?php echo \Typecho\Common::jsonEncode(
+            $rewardUrls,
+            JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP,
+            '[]'
+        ); ?>;
         var bg = $('#background-layer');
         var body = $('#popup-body');
         var open = function (images) {
