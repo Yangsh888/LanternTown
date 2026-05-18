@@ -72,14 +72,12 @@ lanterntown/
 - Headroom 导航隐藏
 
 ## 开源许可协议
-
-本项目基于 GNU General Public License 2.0 协议开源。
+本项目基于 MIT License 协议开源。
 
 核心条款：
-
 - 可以自由使用、修改、分发本软件
-- 分发时必须保留原始版权声明和许可证
-- 修改后的版本必须以相同协议开源
+- 分发时应保留原始版权声明和许可声明
+- 允许闭源使用与二次分发
 - 不提供任何担保，作者不承担使用本软件产生的任何责任
 
-完整协议文本见 [LICENSE](LICENSE) 文件或访问 [GNU GPL 2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)。
+完整协议文本见 [LICENSE](LICENSE) 文件或访问 [MIT License](https://opensource.org/licenses/MIT)。
